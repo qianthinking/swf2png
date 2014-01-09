@@ -82,8 +82,8 @@ package
 				exit(5);
 				return;
 			}
-			outputWidth = Math.ceil(ev.target.width);
-			outputHeight = Math.ceil(ev.target.height);
+			outputWidth = Math.ceil(ev.target.width) * scaleFactor;
+			outputHeight = Math.ceil(ev.target.height) * scaleFactor;
 			log("Loaded!");
 			totalFrames = loadedSwf.totalFrames;
 			log("Frame count: " + totalFrames);
@@ -236,13 +236,12 @@ package
 			return "";
 		}
 		private function getScaleFactor(ev:InvokeEvent):Number {
+            var scaleFactor:Number = 1;
 			if(ev.arguments.length > 2) {
 				log("scale factor set to " + parseFloat(ev.arguments[2]));
-				return parseFloat(ev.arguments[2]);
+				scaleFactor =  parseFloat(ev.arguments[2]);
 			}
-			outputWidth *= scaleFactor;
-			outputHeight *= scaleFactor;
-			return 1;
+			return scaleFactor;
 		}
 
 		private function log(message:String="", add_new_line:Boolean=true):void {
